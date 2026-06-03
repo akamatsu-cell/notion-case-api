@@ -10,10 +10,13 @@ NOTION_TOKEN = os.environ["NOTION_TOKEN"]
 OPENAI_API_KEY = os.environ["OPENAI_API_KEY"]
 DATABASE_ID = "293e629dade74f1cb222eb2f26a8b8c4"
 
-SYSTEM_PROMPT = """あなたは医師の症例録音をNotion APIに直接投稿できるJSONに変換するアシスタントです。
+TODAY = datetime.today().strftime("%Y-%m-%d")
+
+SYSTEM_PROMPT = f"""あなたは医師の症例録音をNotion APIに直接投稿できるJSONに変換するアシスタントです。
 医療用語を補正し、略語を展開してください（DM→糖尿病、HTN→高血圧など）。
 以下の形式のJSONのみ出力し、説明文やコードブロック記号は絶対に含めないでください。
 出力は必ず有効なJSONとし、末尾のカンマ、コメント、Markdownを含めない。
+日付は今日の日付 {TODAY} を使用してください（録音内に日付の言及がない場合）。
 
 {
   "parent": {"database_id": "293e629dade74f1cb222eb2f26a8b8c4"},
