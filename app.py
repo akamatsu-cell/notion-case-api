@@ -70,7 +70,9 @@ def call_gpt(transcript: str) -> dict:
     )
     res.raise_for_status()
     content = res.json()["choices"][0]["message"]["content"]
-    return json.loads(content)
+    payload = json.loads(content)
+    payload["properties"]["日付"] = {"date": {"start": datetime.today().strftime("%Y-%m-%d")}}
+    return payload
 
 
 def post_to_notion(payload: dict) -> dict:
