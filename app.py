@@ -91,7 +91,7 @@ def post_to_notion(payload: dict) -> dict:
 
 @app.route("/", methods=["GET"])
 def health():
-    return jsonify({"status": "ok"})
+    return jsonify({"status": "ok", "today": TODAY, "version": "2026-06-13-1"})
 
 
 @app.route("/case", methods=["POST"])
